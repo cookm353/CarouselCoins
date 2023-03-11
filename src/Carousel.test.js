@@ -13,6 +13,7 @@ it("matches snapshot", () => {
   expect(asFragment()).toMatchSnapshot()
 })
 
+// Tests for right arrow
 it("works when you click on the right arrow", function() {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
 
@@ -28,3 +29,24 @@ it("works when you click on the right arrow", function() {
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).not.toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).toBeInTheDocument();
 });
+
+// tests for left arrow
+it("works when you click on the left arrow", () => {
+  const { queryByTestId, queryByAltText } = render(<Carousel />)
+  
+  // Move to second image in carousel
+  const rightArrow = queryByTestId("right-arrow");
+  fireEvent.click(rightArrow);
+
+  // verify the alt text for the second img is present
+  expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).not.toBeInTheDocument();
+  expect(queryByAltText("Photo by Pratik Patel on Unsplash")).toBeInTheDocument();
+
+  // move back in carousel
+  const leftArrow = queryByTestId("left-arrow")
+  fireEvent.click(leftArrow)
+
+  // expect first image to show, not the second
+  expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
+  expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
+})
