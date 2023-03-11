@@ -10,6 +10,7 @@ function Carousel(props) {
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
   const goForward = () => setCardIdx(cardIdx + 1);
+  const goBack = () => setCardIdx(cardIdx - 1);
   const isFirstImage = cardIdx === 0
   const isLastImage = cardIdx === 2
 
@@ -20,7 +21,7 @@ function Carousel(props) {
         {!isFirstImage &&
           <i
             className="fas fa-chevron-circle-left fa-2x"
-            onClick={goForward}
+            onClick={goBack}
             data-testid="left-arrow"
           />
         }
